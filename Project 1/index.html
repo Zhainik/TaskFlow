@@ -1,23 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow — Канбан-доска</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1> Сайт</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Обо мне</h2>
-            <p>
-                Привет мир</p>
-        </section>
-    </main>
-    <footer>
-        <p>2026 г</p>
-    </footer>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <h1>TaskFlow</h1>
+    </div>
+    <div class="controls">
+      <input type="search" id="searchInput" placeholder="Поиск по задачам..." aria-label="Поиск задач" />
+      <select id="priorityFilter" aria-label="Фильтр по приоритету">
+        <option value="all">Все приоритеты</option>
+        <option value="high">Высокий</option>
+        <option value="medium">Средний</option>
+        <option value="low">Низкий</option>
+      </select>
+      <button type="button" id="openModalBtn" class="btn-primary">+ Новая задача</button>
+    </div>
+  </header>
+
+  <main class="board" id="board">
+    <section class="column" data-status="todo">
+      <div class="column-header">
+        <h2>К выполнению</h2>
+        <span class="counter" id="count-todo">0</span>
+      </div>
+      <div class="task-list" id="list-todo" data-status="todo"></div>
+    </section>
+
+    <section class="column" data-status="inprogress">
+      <div class="column-header">
+        <h2>В работе</h2>
+        <span class="counter" id="count-inprogress">0</span>
+      </div>
+      <div class="task-list" id="list-inprogress" data-status="inprogress"></div>
+    </section>
+
+    <section class="column" data-status="done">
+      <div class="column-header">
+        <h2>Готово</h2>
+        <span class="counter" id="count-done">0</span>
+      </div>
+      <div class="task-list" id="list-done" data-status="done"></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="taskModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h3 id="modalTitle">Создать задачу</h3>
+        <button type="button" class="icon-btn" id="closeModalBtn" aria-label="Закрыть">&times;</button>
+      </div>
+      <form id="taskForm">
+        <input type="hidden" id="taskId" />
+        <label class="field">
+          <span>Название</span>
+          <input type="text" id="taskTitle" required maxlength="80" placeholder="Например: Сверстать адаптивный хедер" />
+        </label>
+        <label class="field">
+          <span>Описание</span>
+          <textarea id="taskDesc" rows="3" maxlength="240" placeholder="Детали выполнения..."></textarea>
+        </label>
+        <div class="field-row">
+          <label class="field">
+            <span>Приоритет</span>
+            <select id="taskPriority">
+              <option value="low">Низкий</option>
+              <option value="medium" selected>Средний</option>
+              <option value="high">Высокий</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Статус</span>
+            <select id="taskStatus">
+              <option value="todo">К выполнению</option>
+              <option value="inprogress">В работе</option>
+              <option value="done">Готово</option>
+            </select>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancelModalBtn">Отмена</button>
+          <button type="submit" class="btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
