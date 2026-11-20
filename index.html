@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinTrack — Учёт личных финансов</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>FinTrack</h1>
+        <p class="subtitle">Контроль доходов, расходов и структуры трат</p>
+      </div>
+      <button type="button" id="exportCsvBtn" class="btn-outline">Экспорт в CSV</button>
+    </header>
+
+    <section class="summary-grid">
+      <article class="stat-card">
+        <span class="stat-label">Текущий баланс</span>
+        <strong class="stat-value" id="balanceValue">0 ₸</strong>
+      </article>
+      <article class="stat-card income">
+        <span class="stat-label">Доходы</span>
+        <strong class="stat-value" id="incomeValue">+0 ₸</strong>
+      </article>
+      <article class="stat-card expense">
+        <span class="stat-label">Расходы</span>
+        <strong class="stat-value" id="expenseValue">-0 ₸</strong>
+      </article>
+    </section>
+
+    <div class="main-grid">
+      <section class="panel">
+        <h2>Добавить операцию</h2>
+        <form id="txForm" class="form">
+          <div class="type-switch">
+            <label>
+              <input type="radio" name="txType" value="expense" checked />
+              <span>Расход</span>
+            </label>
+            <label>
+              <input type="radio" name="txType" value="income" />
+              <span>Доход</span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Сумма (₸)</span>
+            <input type="number" id="txAmount" min="1" step="any" required placeholder="5000" />
+          </label>
+
+          <label class="field">
+            <span>Категория</span>
+            <select id="txCategory"></select>
+          </label>
+
+          <label class="field">
+            <span>Комментарий</span>
+            <input type="text" id="txNote" maxlength="60" placeholder="Обед, подписка, фриланс..." />
+          </label>
+
+          <label class="field">
+            <span>Дата</span>
+            <input type="date" id="txDate" required />
+          </label>
+
+          <button type="submit" class="btn-primary">Добавить запись</button>
+        </form>
+
+        <div class="analytics">
+          <h3>Расходы по категориям</h3>
+          <div id="categoryBars" class="bars"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="list-header">
+          <h2>История операций</h2>
+          <select id="typeFilter" aria-label="Фильтр операций">
+            <option value="all">Все операции</option>
+            <option value="income">Только доходы</option>
+            <option value="expense">Только расходы</option>
+          </select>
+        </div>
+
+        <div id="txList" class="tx-list"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
