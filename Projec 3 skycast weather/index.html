@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyCast — Прогноз погоды</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="search-bar">
+      <form id="cityForm" class="search-form">
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Введите город (например: Алматы, Астана, Уральск)..."
+          required
+        />
+        <button type="submit">Найти</button>
+      </form>
+      <div class="quick-cities" id="quickCities">
+        <button type="button" data-city="Уральск">Уральск</button>
+        <button type="button" data-city="Алматы">Алматы</button>
+        <button type="button" data-city="Астана">Астана</button>
+        <button type="button" data-city="Москва">Москва</button>
+      </div>
+    </header>
+
+    <div id="statusMessage" class="status-msg" hidden></div>
+
+    <section id="weatherContent" class="weather-content" hidden>
+      <article class="current-card">
+        <div>
+          <span class="location-tag" id="locationName">—</span>
+          <div class="temp-row">
+            <span class="current-temp" id="currentTemp">--°</span>
+            <span class="weather-icon" id="currentIcon">⛅</span>
+          </div>
+          <p class="weather-desc" id="weatherDesc">—</p>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span>Ощущается</span>
+            <strong id="feelsLike">--°</strong>
+          </div>
+          <div class="metric">
+            <span>Влажность</span>
+            <strong id="humidity">--%</strong>
+          </div>
+          <div class="metric">
+            <span>Ветер</span>
+            <strong id="windSpeed">-- м/с</strong>
+          </div>
+        </div>
+      </article>
+
+      <section class="forecast-section">
+        <h2>Прогноз на 5 дней</h2>
+        <div class="forecast-grid" id="forecastGrid"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
